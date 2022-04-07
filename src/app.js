@@ -23,7 +23,7 @@ mongoose.connect("mongodb://localhost:27017/asm-nodejs")
     .catch((error) => console.log(error))
 
 //Connect
-const PORT = 3001;
+const PORT = 8000;
 app.listen(PORT, () => {
     console.log(`Sever running port 3001`)
 })
