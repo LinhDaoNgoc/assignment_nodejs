@@ -25,5 +25,5 @@ mongoose.connect("mongodb://localhost:27017/asm-nodejs")
 //Connect
 const PORT = 8000;
 app.listen(PORT, () => {
-    console.log(`Sever running port 3001`)
+    console.log(`Sever running port: ${PORT}`);
 })
