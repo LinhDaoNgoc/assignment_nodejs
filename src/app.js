@@ -4,7 +4,7 @@ import productRouter from './routes/product';
 import userRouter from './routes/user'
 import cateRouter from './routes/category'
 import postRoter from './routes/posts'
-import sliderRouter from './routes/slider'
+
 import cors from 'cors'
 // const admin = require('./routes/user');
 const app = express();
@@ -16,7 +16,7 @@ app.use("/api", productRouter);
 app.use("/api", userRouter);
 app.use("/api", cateRouter)
 app.use("/api", postRoter);
-app.use("/api", sliderRouter)
+
     // connect database
 mongoose.connect("mongodb://localhost:27017/asm-nodejs")
     .then(() => console.log("Connect db thanh cong"))
