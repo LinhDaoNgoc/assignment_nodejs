@@ -3,11 +3,11 @@ import jwt from 'jsonwebtoken';
 export const signup = async(req, res) => {
     try {
         const { name, email, password } = req.body;
-        // tai khoan co ton tai hay ko
+        // tài khoản có tồn tại hay không
         const existUser = await User.findOne({ email }).exec();
         if (existUser) {
             return res.status(400).json({
-                message: "Email da ton tai , vui long dang "
+                message: "Email đã tồn tại vui lòng đăng ký email khác "
             })
         }
         const user = await new User({ name, email, password }).save();
@@ -20,7 +20,7 @@ export const signup = async(req, res) => {
         });
     } catch (error) {
         res.status(400).json({
-            message: "Khong tao duoc tai khoan"
+            message: "Không tạo được tài khoản"
         })
     }
 
@@ -31,21 +31,22 @@ export const signin = async(req, res) => {
     const user = await User.findOne({ email }).exec();
     if (!user) {
         return res.status(401).json({
-            message: "User khong ton tai"
+            message: "user không tồn tại"
         })
     }
     if (!user.authenticate(password)) {
         return res.status(401).json({
-            message: "Mat khau khong dung"
+            message: "Mật khẩu không đúng"
         })
     }
-    const token = jwt.sign({ _id: user._id }, "123456", { expiresIn: 60 * 60 });
+    const token = jwt.sign({ _id: user._id }, "1234567", { expiresIn: 60 * 60 });
     return res.json({
         token,
         user: {
             _id: user._id,
             email: user.email,
-            name: user.name
+            name: user.name,
+            role: user.role,
         }
     })
 }
